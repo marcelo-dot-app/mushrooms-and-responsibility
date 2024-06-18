@@ -32,6 +32,8 @@ export default class Resources extends EventEmitter {
           this.loadSource(source, file);
         });
       }
+
+      console.log('done:', this.items);
     }
   }
 

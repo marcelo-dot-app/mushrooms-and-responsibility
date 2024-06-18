@@ -5,16 +5,14 @@ export default class Mushroom {
   constructor() {
     this.core = new Core();
     this.scene = this.core.scene;
-    this.resources = this.core.resources;
-    this.time = this.core.time;
-
-    this.resource = this.resources.items.mushroom;
 
     this.setModel();
   }
 
   setModel() {
-    this.model = this.resource.scene;
+    this.geometry = new THREE.TetrahedronGeometry(1, 0);
+    this.material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    this.model = new THREE.Mesh(this.geometry, this.material);
     this.model.scale.set(1, 1, 1);
     this.scene.add(this.model);
 

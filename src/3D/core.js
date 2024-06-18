@@ -7,6 +7,7 @@ import sources from "./sources.js";
 import Camera from "./camera.js";
 import Renderer from "./renderer.js";
 import Mushroom from "./world/mushroom.js";
+import Sphere from "./world/sphere.js";
 
 let instance = null;
 
@@ -24,7 +25,8 @@ export default class Core {
     this.scene = new THREE.Scene();
     this.camera = new Camera();
     this.renderer = new Renderer();
-    this.mushroom = new Mushroom();
+    // this.mushroom = new Mushroom();
+    this.sphere = new Sphere();
 
     this.sizes.on('resize', () => {
       this.resize();

@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import Core from './core.js';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { OrbitControls } from 'three/addons';
 
 export default class Camera {
   constructor() {
