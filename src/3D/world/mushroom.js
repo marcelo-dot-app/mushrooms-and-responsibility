@@ -5,20 +5,25 @@ export default class Mushroom {
   constructor() {
     this.core = new Core();
     this.scene = this.core.scene;
+    this.resources = this.core.resources;
+
+    this.resource = this.resources.items.mushroom;
 
     this.setModel();
   }
 
   setModel() {
-    this.geometry = new THREE.TetrahedronGeometry(1, 0);
-    this.material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-    this.model = new THREE.Mesh(this.geometry, this.material);
+    this.model = this.resource.scene.children[0];
     this.model.scale.set(1, 1, 1);
     this.scene.add(this.model);
 
     this.model.traverse((child) => {
-      if (child instanceof THREE.Mesh) {
+      if (child.isMesh) {
+        const box = new THREE.Box3().setFromObject(child);
+        const center = box.getCenter(new THREE.Vector3().normalize());
+        child.positions.sub(center);
         child.castShadow = true;
+        // child.geometry.center();
       }
     });
   }

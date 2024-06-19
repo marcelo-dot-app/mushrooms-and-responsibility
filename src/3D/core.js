@@ -25,8 +25,10 @@ export default class Core {
     this.scene = new THREE.Scene();
     this.camera = new Camera();
     this.renderer = new Renderer();
-    // this.mushroom = new Mushroom();
-    this.sphere = new Sphere();
+
+    this.resources.on('ready', () => {
+      this.mushroom = new Mushroom();
+    });
 
     this.sizes.on('resize', () => {
       this.resize();

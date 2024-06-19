@@ -12,6 +12,8 @@ export default class Resources extends EventEmitter {
 
     this.setLoaders();
     this.startLoading();
+
+    this.on('ready', () => {});
   }
 
   setLoaders() {
@@ -40,6 +42,8 @@ export default class Resources extends EventEmitter {
   loadSource(source, file) {
     this.items[source.name] = file;
     this.loaded++;
+
+    console.log('loaded:', this.loaded, this.toLoad);
 
     if (this.loaded === this.toLoad) {
       this.trigger('ready');
