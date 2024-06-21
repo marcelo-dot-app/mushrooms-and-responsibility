@@ -7,8 +7,9 @@ export default class Resources extends EventEmitter {
     super();
     this.sources = sources;
     this.items = {};
-    this.toLoad = this.sources.length;
-    this.loaded = 0;
+    this.itemsToLoad = this.sources.length;
+    this.itemLoadedCount = 0;
+    this.loaded = false;
 
     this.setLoaders();
     this.startLoading();
@@ -34,19 +35,16 @@ export default class Resources extends EventEmitter {
           this.loadSource(source, file);
         });
       }
-
-      console.log('done:', this.items);
     }
   }
 
   loadSource(source, file) {
     this.items[source.name] = file;
-    this.loaded++;
+    this.itemLoadedCount++;
 
-    console.log('loaded:', this.loaded, this.toLoad);
-
-    if (this.loaded === this.toLoad) {
+    if (this.itemLoadedCount === this.itemsToLoad) {
       this.trigger('ready');
+      this.loaded = true;
     }
   }
 }

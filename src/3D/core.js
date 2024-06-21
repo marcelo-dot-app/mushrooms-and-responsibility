@@ -25,6 +25,8 @@ export default class Core {
     this.scene = new THREE.Scene();
     this.camera = new Camera();
     this.renderer = new Renderer();
+    // const axesHelper = new THREE.AxesHelper(5);
+    // this.scene.add(axesHelper);
 
     this.resources.on('ready', () => {
       this.mushroom = new Mushroom();
@@ -37,6 +39,10 @@ export default class Core {
     this.time.on('tick', () => {
       this.camera.update();
       this.renderer.update();
+
+      if (this.resources.loaded) {
+        this.mushroom.model.rotation.z += 0.01;
+      }
     });
   }
 

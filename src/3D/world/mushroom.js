@@ -6,25 +6,30 @@ export default class Mushroom {
     this.core = new Core();
     this.scene = this.core.scene;
     this.resources = this.core.resources;
-
-    this.resource = this.resources.items.mushroom;
+    this.model = this.resources.items.mushroom_three;
 
     this.setModel();
+    this.setLights();
   }
 
   setModel() {
-    this.model = this.resource.scene.children[0];
+    this.model = this.model.scene.children[0];
     this.model.scale.set(1, 1, 1);
     this.scene.add(this.model);
 
     this.model.traverse((child) => {
       if (child.isMesh) {
-        const box = new THREE.Box3().setFromObject(child);
-        const center = box.getCenter(new THREE.Vector3().normalize());
-        child.positions.sub(center);
         child.castShadow = true;
+        child.rotation.set(0, 0, 1);
+        child.position.set(0, 0, 0);
         // child.geometry.center();
       }
     });
+  }
+
+  setLights() {
+    const light = new THREE.AmbientLight(0xffffff, 2);
+    light.position.set(3, 3, 3);
+    this.scene.add(light);
   }
 };
